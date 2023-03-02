@@ -1,0 +1,10 @@
+default: &default
+  adapter: sqlite3
+
+development:
+  <<: *default
+  database: db/projects-dev.sqlite3
+
+production:
+  <<: *default
+  database: db/projects-prod.sqlite3
