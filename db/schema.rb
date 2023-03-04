@@ -17,6 +17,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_220949) do
     t.datetime "due"
     t.datetime "createdAt", null: false
     t.integer "status", default: 0, null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -25,4 +27,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_220949) do
     t.string "password", null: false
   end
 
+  add_foreign_key "projects", "users"
 end
