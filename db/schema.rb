@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_220949) do
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "username", null: false
-    t.string "password", null: false
+    t.string "password_digest", null: false
   end
 
   add_foreign_key "projects", "users"
