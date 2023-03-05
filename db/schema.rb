@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_04_220949) do
     t.datetime "due"
     t.datetime "createdAt", null: false
     t.integer "status", default: 0, null: false
+    t.string "member"
   end
 
   create_table "users", force: :cascade do |t|
