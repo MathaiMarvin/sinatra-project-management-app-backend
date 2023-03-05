@@ -5,7 +5,7 @@ class ProjectController < Sinatra::Base
     # end
 
     # Creating users
-    post '/users/create' do
+    post '/users/signup' do
         # Create a new user
         # Data is formatted as json
         data = JSON.parse(request.body.read)
@@ -21,6 +21,47 @@ class ProjectController < Sinatra::Base
         }.to_json]
         end
     end
+
+    # post '/users/login' do
+    #     begin
+    #       data = JSON.parse(request.body.read)
+    #       username = data['username']
+    #       password = data['password']
+      
+    #       user = User.find { |u| u[:username] == username && u[:password_digest] == password }
+      
+    #       if user
+    #         content_type :json
+    #         { id: user[:id], username: user[:username] }.to_json
+    #       else
+    #         halt 401, 'Unauthorized'
+    #       end
+    #     rescue JSON::ParserError
+    #       halt 400, 'Bad request'
+    #     rescue StandardError => e
+    #       halt 500, "Internal server error: #{e.message}"
+    #     end
+    #   end
+    post '/users/login' do
+        begin
+          data = JSON.parse(request.body.read)
+          username = data['username']
+          password = data['password']
+      
+          user = User.find { |u| u[:username] == username }
+      
+          if user && BCrypt::Password.new(user[:password_digest]) == password
+            content_type :json
+            { id: user[:id], username: user[:username] }.to_json
+          else
+            halt 401, 'Unauthorized'
+          end
+        rescue JSON::ParserError
+          halt 400, 'Bad request'
+        rescue StandardError => e
+          halt 500, "Internal server error: #{e.message}"
+        end
+      end
 
     post '/projects/create' do
         # create a new project

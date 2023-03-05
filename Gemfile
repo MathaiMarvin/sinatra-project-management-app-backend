@@ -16,6 +16,8 @@ gem 'puma', '~> 6.1'
 
 gem 'bcrypt', '~> 3.1', '>= 3.1.18'
 
+gem 'rack-cors', '~> 2.0'
+
 gem 'require_all', '~> 3.0'
 
 
