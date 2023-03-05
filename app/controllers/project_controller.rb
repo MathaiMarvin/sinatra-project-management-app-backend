@@ -47,6 +47,9 @@ class ProjectController < Sinatra::Base
           data = JSON.parse(request.body.read)
           username = data['username']
           password = data['password']
+
+
+
       
           user = User.find { |u| u[:username] == username }
       
@@ -68,15 +71,14 @@ class ProjectController < Sinatra::Base
         # Data has been formatted as json
         data = JSON.parse(request.body.read)
 
-        # Set the user_id of the project to the ID of the current user
-        user_id = data['user_id']
+
 
         # create a record in the table
         begin
             today = Time.now
             data["createdAt"] = today
             project = Project.create(data)
-            project.user_id = user_id
+            
             [201, project.to_json]
 
         rescue => e
@@ -94,6 +96,15 @@ class ProjectController < Sinatra::Base
 
         [200, projects.to_json]
 
+    end
+    get '/projects/:id' do
+        project = Project.find(params[:id])
+      
+        if project
+          [200, project.to_json]
+        else
+          [404, { error: "Project not found" }.to_json]
+        end
     end
 
     put '/projects/update/:id' do
