@@ -1,11 +1,15 @@
+require 'sinatra'
+require 'sinatra/cors'
 class ProjectController < Sinatra::Base
 
-
-    before do
-      headers 'Access-Control-Allow-Origin' => '*', 
-              'Access-Control-Allow-Methods' => ['OPTIONS', 'GET', 'POST'],
-              'Access-Control-Allow-Headers' => 'Content-Type'
-    end
+  configure do
+    enable :cross_origin
+  end
+  
+  set :allow_origin, :any
+  set :allow_methods, [:get, :post, :put, :delete, :options]
+  set :allow_credentials, true
+  set :allow_headers, ["*", "Content-Type", "Accept", "Authorization"]
     # get '/hey' do
     #     "Hey there!"
     # end

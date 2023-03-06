@@ -20,6 +20,8 @@ gem 'rack-cors', '~> 2.0'
 
 gem 'sinatra-cross_origin', '~> 0.4.0'
 
+gem 'sinatra-cors', '~> 1.2'
+
 gem 'require_all', '~> 3.0'
 
 
