@@ -20,6 +20,8 @@ gem 'rack-cors', '~> 2.0'
 
 gem 'require_all', '~> 3.0'
 
+ruby File.read('.ruby-version').strip
+
 
 group :development do
     gem 'rerun', '~> 0.14.0'
